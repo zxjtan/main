@@ -13,9 +13,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2103-AY1819S1-T9-1/main
+:repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
 
-By: `Team T9-1`      Since: `Aug 2018`      Licence: `MIT`
+By: `Team T09-1`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
