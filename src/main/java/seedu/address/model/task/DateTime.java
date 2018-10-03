@@ -33,7 +33,7 @@ public class DateTime implements Comparable<DateTime> {
     public final Calendar calendar;
 
     /**
-     * Constructs a {@code DateTime}.
+     * Constructs a {@code DateTime} from input.
      *
      * @param date a valid date string.
      * @param time a valid time string.
@@ -43,6 +43,21 @@ public class DateTime implements Comparable<DateTime> {
         checkArgument(isValidDateTimeFormat(date, time), MESSAGE_DATETIME_FORMAT_CONSTRAINTS);
         checkArgument(isValidDateTimeValues(date, time), MESSAGE_DATETIME_VALUE_CONSTRAINTS);
         this.calendar = createCalendar(date, time);
+    }
+
+    /**
+     * Constructs a {@code DateTime} from storage.
+     *
+     * @param dateTime a valid calendar instance.
+     */
+    public DateTime(Calendar dateTime) {
+        requireAllNonNull(dateTime);
+        // TODO: check dateTime validity
+        this.calendar = dateTime;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     public String getDate() {
