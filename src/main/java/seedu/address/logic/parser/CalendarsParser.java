@@ -7,17 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.calendars.ShowCommand;
+import seedu.address.logic.parser.calendars.ShowCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input. Sends command to the appropriate module parser.
+ * Parses user input.
  */
-public class AppParser {
+public class CalendarsParser {
+
+    public static final String MODULE_WORD = "calendars";
 
     /**
      * Used for initial separation of command word and args.
@@ -41,29 +41,8 @@ public class AppParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case ContactsParser.MODULE_WORD:
-            return new ContactsParser().parseCommand(arguments);
-
-        case TasksParser.MODULE_WORD:
-            return new TasksParser().parseCommand(arguments);
-
-        case CalendarsParser.MODULE_WORD:
-            return new CalendarsParser().parseCommand(arguments);
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+        case ShowCommand.COMMAND_WORD:
+            return new ShowCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
