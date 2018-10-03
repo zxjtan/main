@@ -21,26 +21,27 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in
+     * the address book.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given person. The person must exist in the address book.
      */
     void deletePerson(Person target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given person. {@code person} must not already exist in the address
+     * book.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the address book. The person identity of
+     * {@code editedPerson} must not be the same as another existing person in the
+     * address book.
      */
     void updatePerson(Person target, Person editedPerson);
 
@@ -48,7 +49,9 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered person list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -59,8 +62,7 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
-     * Adds the given task.
-     * {@code task} must not already exist in the address book.
+     * Adds the given task. {@code task} must not already exist in the address book.
      */
     void addTask(Task task);
 
@@ -74,10 +76,26 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered task list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered task list containing tasks to be
+     * rendered in the calendar
+     */
+    ObservableList<Task> getCalendarTaskList();
+
+    /**
+     * Updates the filter of the calendar task list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateCalendarTaskList(Predicate<Task> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.

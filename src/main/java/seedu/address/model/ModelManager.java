@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> calendarTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
+        calendarTasks = new FilteredList<>(versionedAddressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -107,8 +109,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -120,11 +122,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Task} backed by the
+     * internal list of {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
@@ -136,7 +139,27 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
-    //=========== Undo/Redo =================================================================================
+
+    // =========== Filtered Person List Accessors
+    // =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getCalendarTaskList() {
+        return FXCollections.unmodifiableObservableList(calendarTasks);
+    }
+
+    @Override
+    public void updateCalendarTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        calendarTasks.setPredicate(predicate);
+    }
+
+    // =========== Undo/Redo
+    // =================================================================================
 
     @Override
     public boolean canUndoAddressBook() {
@@ -179,8 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons)
+        return versionedAddressBook.equals(other.versionedAddressBook) && filteredPersons.equals(other.filteredPersons)
                 && filteredTasks.equals(other.filteredTasks);
     }
 
