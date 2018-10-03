@@ -99,6 +99,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void deleteTask(Task target) {
+        versionedAddressBook.deleteTask(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
